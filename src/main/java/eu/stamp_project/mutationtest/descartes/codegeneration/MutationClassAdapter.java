@@ -22,6 +22,7 @@ public class MutationClassAdapter extends ClassVisitor {
         MethodVisitor methodVisitor = cv.visitMethod(access, name, desc, signature, exceptions);
         Location location = mID.getLocation();
         if(location.getMethodDesc().equals(desc) && location.getMethodName().name().equals(name)) {
+            System.out.println(mID.getMutator());
             return new MutationMethodAdapter(
                     MutationOperator.fromID(mID.getMutator()),
                     new Method(location.getMethodName().name(), location.getMethodDesc()),
