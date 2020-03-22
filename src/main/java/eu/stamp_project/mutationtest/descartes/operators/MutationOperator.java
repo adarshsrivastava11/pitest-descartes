@@ -1,5 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.commons.Method;
 
@@ -18,6 +19,8 @@ public abstract class MutationOperator {
      * @return A boolean value indicating if the mutation can be performed
      */
     public abstract boolean canMutate(Method method);
+
+    public abstract boolean canMutate(ClassName className, Method method);
 
     public abstract void generateCode(Method method, MethodVisitor mv);
 

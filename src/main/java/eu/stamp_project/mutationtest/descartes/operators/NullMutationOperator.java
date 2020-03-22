@@ -1,5 +1,6 @@
 package eu.stamp_project.mutationtest.descartes.operators;
 
+import org.pitest.classinfo.ClassName;
 import org.pitest.reloc.asm.MethodVisitor;
 import org.pitest.reloc.asm.Opcodes;
 import org.pitest.reloc.asm.Type;
@@ -24,8 +25,13 @@ public class NullMutationOperator extends MutationOperator{
     }
 
     @Override
+    public boolean canMutate(ClassName className, Method method) {
+       int target = method.getReturnType().getSort();
+        return  target == Type.OBJECT || target == Type.ARRAY;
+    }
+
+    @Override
     public void generateCode(Method method, MethodVisitor mv) {
-        assert canMutate(method);
         mv.visitInsn(Opcodes.ACONST_NULL);
         mv.visitInsn(Opcodes.ARETURN);
     }

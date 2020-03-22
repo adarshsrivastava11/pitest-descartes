@@ -57,7 +57,8 @@ public class DescartesMutationEngine implements  MutationEngine {
     public Collection<MutationOperator> getOperatorsFor(final ClassName className, final Method method) {
         if(excludedMethods.test(method))
             return Collections.<MutationOperator>emptyList();
-        return operators.stream().filter(op -> op.canMutate(method)).collect(Collectors.toList());
+        System.out.println(className);
+        return operators.stream().filter(op -> op.canMutate(className, method)).collect(Collectors.toList());
     }
 
     @Override
