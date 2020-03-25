@@ -1,6 +1,7 @@
 package eu.stamp_project.mutationtest.descartes;
 
 import eu.stamp_project.mutationtest.descartes.operators.MutationOperator;
+import eu.stamp_project.mutationtest.descartes.operators.ThisMutationOperator;
 import org.pitest.classinfo.ClassByteArraySource;
 import org.pitest.classinfo.ClassName;
 import org.pitest.mutationtest.engine.Mutater;
@@ -55,10 +56,14 @@ public class DescartesMutationEngine implements  MutationEngine {
     }
 
     public Collection<MutationOperator> getOperatorsFor(final ClassName className, final Method method) {
+        ThisMutationOperator thisOperator = new ThisMutationOperator();
         if(excludedMethods.test(method))
             return Collections.<MutationOperator>emptyList();
-        System.out.println(className);
-        return operators.stream().filter(op -> op.canMutate(className, method)).collect(Collectors.toList());
+        Collection<MutationOperator> mutationOperators = operators.stream().filter(op -> op.canMutate(className, method)).collect(Collectors.toList());
+        if(thisOperator.canMutate(className, method)) {
+            mutationOperators.add(thisOperator);
+        }
+        return mutationOperators;
     }
 
     @Override
