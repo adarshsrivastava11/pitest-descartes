@@ -35,6 +35,9 @@ public abstract class MutationOperator {
             throw new WrongOperatorException("Invalid operator id: " + parser.getErrors().get(0));
         if(value == null)
             return new NullMutationOperator();
+        if(value.equals(Token.THIS.getData())) {
+            return new ThisMutationOperator();
+        }
         if (value.equals(Token.NEW.getData())) {
         	return new NewInstanceMutationOperator();
         }

@@ -21,6 +21,7 @@ public class DescartesEngineFactory implements MutationEngineFactory{
     public MutationEngine createEngine(EngineArguments engineArguments) {
 
         Collection<String> operators = engineArguments.mutators();
+        System.out.println(operators);
         if(operators.isEmpty())
             operators = getDefaultOperators();
 
@@ -40,6 +41,7 @@ public class DescartesEngineFactory implements MutationEngineFactory{
         return Arrays.asList(
                 "void",
                 "null",
+                "this",
                 "empty",
                 "true", "false",
                 "0", "1",
