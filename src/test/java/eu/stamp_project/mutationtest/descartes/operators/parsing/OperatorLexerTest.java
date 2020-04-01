@@ -15,6 +15,7 @@ public class OperatorLexerTest {
         TokenType[] types = {
                 TokenType.VOID_KWD,
                 TokenType.NULL_KWD,
+                TokenType.THIS_KWD,
                 TokenType.TRUE_KWD,
                 TokenType.FALSE_KWD,
                 TokenType.EMPTY_KWD,
@@ -26,11 +27,12 @@ public class OperatorLexerTest {
                 TokenType.OPTIONAL_KWD,
                 TokenType.EOF
         };
-        String input = "void null true false empty ( byte ) short new optional";
+        String input = "void null this true false empty ( byte ) short new optional";
         OperatorLexer lexer = new OperatorLexer(new StringReader(input));
         try {
             for (TokenType token :
                     types) {
+                        System.out.println(token.name());
                 assertEquals("Failed to match: " + token.name(), token, lexer.nextToken().getType());
             }
         }catch(IOException exc){

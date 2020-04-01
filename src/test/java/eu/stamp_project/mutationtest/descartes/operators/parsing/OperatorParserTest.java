@@ -19,6 +19,7 @@ public class OperatorParserTest {
         return Arrays.asList(new Object[][] {
                 {"void", Void.class},
                 {"null", null},
+                {"this", "this"},
                 {"empty", "empty"},
                 {"optional", "optional"},
                 {"3", 3},
@@ -50,6 +51,7 @@ public class OperatorParserTest {
     @Test
     public void shouldParseValue() {
         OperatorParser parser = new OperatorParser(input);
+        System.out.println(output);
         assertEquals(output, parser.parse());
     }
 

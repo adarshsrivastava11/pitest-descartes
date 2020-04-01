@@ -68,8 +68,8 @@ public class OperatorParser {
             next();
             if(lookaheadIsOneOf(
                     TokenType.NEW_KWD,
-                    TokenType.THIS_KWD,
                     TokenType.NULL_KWD,
+                    TokenType.THIS_KWD,
                     TokenType.VOID_KWD,
                     TokenType.TRUE_KWD,
                     TokenType.FALSE_KWD,
@@ -83,6 +83,7 @@ public class OperatorParser {
                     TokenType.DOUBLE_LITERAL
                     )) {
                 result = lookahead.getData();
+                System.out.println(result);
             }
             else if(lookaheadIs(TokenType.MINUS)) {
                 parseNegatedNumber();
