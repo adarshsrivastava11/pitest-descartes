@@ -31,18 +31,15 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-
 public class TestUtils {
 
     public static Collection<Method> getMethods(Class<?> klass) {
-        System.out.println("Class - " + klass.getName());
-        return getMethodNodes(klass)
-                .stream()
-                .map(methodNode -> new Method(methodNode.name, methodNode.desc))
+        return getMethodNodes(klass).stream().map(methodNode -> new Method(methodNode.name, methodNode.desc))
                 .collect(Collectors.toList());
     }
 
-    //yaha se input ho rahi list of functions, so yaha par dekhna hai let me check wait here one min bas
+    // yaha se input ho rahi list of functions, so yaha par dekhna hai let me check
+    // wait here one min bas
     public static Collection<MethodNode> getMethodNodes(Class<?> klass) {
         try {
             ClassReader reader = new ClassReader(klass.getName());
@@ -96,13 +93,15 @@ public class TestUtils {
         return classTree;
     }
 
-    public static Collection<MutationDetails> findMutationPoints(Class<?> target, String... operators) throws IOException {
+    public static Collection<MutationDetails> findMutationPoints(Class<?> target, String... operators)
+            throws IOException {
         DescartesEngineFactory factory = new DescartesEngineFactory();
-        MutationEngine engine = factory.createEngine(EngineArguments.arguments().withMutators(Arrays.asList(operators)));
+        MutationEngine engine = factory
+                .createEngine(EngineArguments.arguments().withMutators(Arrays.asList(operators)));
         String className = target.getName();
-        System.out.println("Finding Mutations for - "+className);
         ClassReader reader = new ClassReader(className);
-        MutationPointFinder finder = new MutationPointFinder(ClassName.fromString(className), (DescartesMutationEngine) engine);
+        MutationPointFinder finder = new MutationPointFinder(ClassName.fromString(className),
+                (DescartesMutationEngine) engine);
         reader.accept(finder, 0);
         return finder.getMutationPoints();
     }

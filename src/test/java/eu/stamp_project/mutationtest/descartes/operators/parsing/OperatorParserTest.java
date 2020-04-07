@@ -16,30 +16,11 @@ public class OperatorParserTest {
 
     @Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
-                {"void", Void.class},
-                {"null", null},
-                {"this", "this"},
-                {"empty", "empty"},
-                {"optional", "optional"},
-                {"3", 3},
-                {"3L", 3L},
-                {"(byte)3", (byte)3},
-                {"(short)3", (short)3},
-                {"3.0", 3.0},
-                {"3.0f", 3.0f},
-                {"true", true},
-                {"false", false},
-                {"'a'", 'a'},
-                {"\"string\"", "string"},
-                {"-1", -1},
-                {"-2L", -2L},
-                {"-3.1f", -3.1f},
-                {"-4.5", -4.5},
-                {"(byte)-5", (byte)-5},
-                {"(short)-6", (short)-6},
-                {"\"\\n\"", "\n"}
-        });
+        return Arrays.asList(new Object[][] { { "void", Void.class }, { "null", null }, { "this", "this" },
+                { "empty", "empty" }, { "optional", "optional" }, { "3", 3 }, { "3L", 3L }, { "(byte)3", (byte) 3 },
+                { "(short)3", (short) 3 }, { "3.0", 3.0 }, { "3.0f", 3.0f }, { "true", true }, { "false", false },
+                { "'a'", 'a' }, { "\"string\"", "string" }, { "-1", -1 }, { "-2L", -2L }, { "-3.1f", -3.1f },
+                { "-4.5", -4.5 }, { "(byte)-5", (byte) -5 }, { "(short)-6", (short) -6 }, { "\"\\n\"", "\n" } });
     }
 
     @Parameter
@@ -51,10 +32,7 @@ public class OperatorParserTest {
     @Test
     public void shouldParseValue() {
         OperatorParser parser = new OperatorParser(input);
-        System.out.println(output);
         assertEquals(output, parser.parse());
     }
-
-
 
 }

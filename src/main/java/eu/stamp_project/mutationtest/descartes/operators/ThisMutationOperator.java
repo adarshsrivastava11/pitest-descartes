@@ -9,22 +9,28 @@ import org.pitest.reloc.asm.commons.Method;
 /**
  * Replaces the method body with a <code>return null</code> statement
  */
-public class ThisMutationOperator extends MutationOperator{
+public class ThisMutationOperator extends MutationOperator {
 
     /**
-     * Returns a value indicating whether the operator can transform the given method.
-     * In this case whether <code>null</code> could be assigned to the return type.
+     * Returns a value indicating whether the operator can transform the given
+     * method. In this case whether <code>null</code> could be assigned to the
+     * return type.
      *
      * @param method Method to be tested by the operator
      * @return A boolean value indicating if null can be assigned to the return type
      */
     @Override
     public boolean canMutate(ClassName className, Method method) {
+        System.out.println("Class Name - " + className.asInternalName());
+        System.out.println("Method Return Type" + method.getDescriptor());
+        // if (className.asJavaName().equals(method.getReturnType().toString())) {
+        // return true;
+        // }
         String[] objArr = method.getReturnType().toString().split("/");
         String[] classArr = className.asJavaName().split("\\.");
         int check = objArr[objArr.length - 1].indexOf(classArr[classArr.length - 1]);
-        if(check != -1){
-            return  true;
+        if (check != -1) {
+            return true;
         }
         return false;
     }
@@ -41,7 +47,7 @@ public class ThisMutationOperator extends MutationOperator{
     }
 
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return "All method instructions replaced by: return this;";
     }
 
