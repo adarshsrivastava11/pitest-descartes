@@ -22,16 +22,18 @@ public class ThisMutationOperator extends MutationOperator {
     @Override
     public boolean canMutate(ClassName className, Method method) {
         System.out.println("Class Name - " + className.asInternalName());
-        System.out.println("Method Return Type" + method.getDescriptor());
-        // if (className.asJavaName().equals(method.getReturnType().toString())) {
-        // return true;
-        // }
-        String[] objArr = method.getReturnType().toString().split("/");
-        String[] classArr = className.asJavaName().split("\\.");
-        int check = objArr[objArr.length - 1].indexOf(classArr[classArr.length - 1]);
-        if (check != -1) {
+        System.out.println("Method Return Type" + method.getReturnType().toString());
+        String classNameAsInternal = className.asInternalName();
+        String methodReturn = method.getReturnType().toString();
+        if (methodReturn.contains(classNameAsInternal)) {
             return true;
         }
+        // String[] objArr = method.getReturnType().toString().split("/");
+        // String[] classArr = className.asJavaName().split("\\.");
+        // int check = objArr[objArr.length - 1].indexOf(classArr[classArr.length - 1]);
+        // if (check != -1) {
+        // return true;
+        // }
         return false;
     }
 
