@@ -22,10 +22,10 @@ public class ThisMutationOperator extends MutationOperator {
     @Override
     public boolean canMutate(ClassName className, Method method) {
         System.out.println("Class Name - " + className.asInternalName());
-        System.out.println("Method Return Type" + method.getReturnType().toString());
+        System.out.println("Method Return Type - " + method.getReturnType().getInternalName());
         String classNameAsInternal = className.asInternalName();
-        String methodReturn = method.getReturnType().toString();
-        if (methodReturn.contains(classNameAsInternal)) {
+        String methodReturn = method.getReturnType().getInternalName();
+        if (classNameAsInternal.equals(methodReturn)) {
             return true;
         }
         // String[] objArr = method.getReturnType().toString().split("/");
